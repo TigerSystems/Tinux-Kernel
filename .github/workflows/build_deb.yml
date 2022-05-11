@@ -30,4 +30,4 @@ jobs:
       run: make deb-pkg
       
     - name: List Files
-      run: ls
+      run: ls ./debian
