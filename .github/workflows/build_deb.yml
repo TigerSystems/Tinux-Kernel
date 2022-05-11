@@ -28,3 +28,6 @@ jobs:
       
     - name: Build Kernel DEB-Package
       run: make deb-pkg
+      
+    - name: List Files
+      run: ls
