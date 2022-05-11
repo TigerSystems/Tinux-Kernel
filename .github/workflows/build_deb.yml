@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Install libelf-dev
-      run: sudo apt intall libelf-dev
+    - name: Install Dependencies
+      run: sudo apt install libelf-dev
     
     - name: make clean
       run: make clean
