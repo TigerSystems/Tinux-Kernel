@@ -17,8 +17,6 @@ jobs:
     
     - name: Update APT
       run: sudo apt-get update
-    - name: Prepare Environment
-      run: sudo apt-get build-dep linux linux-image-$(uname -r)
     - name: Install Dependencies
       run: sudo apt-get install libncurses-dev gawk flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf
     
