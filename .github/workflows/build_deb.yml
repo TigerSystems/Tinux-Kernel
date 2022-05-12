@@ -33,8 +33,8 @@ jobs:
     
     - name: Printing Debugging-Text
       id: debug
-      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }} Kernel: ${{ steps.adv_info.outputs.kernel }}
-    
+      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }}, Kernel ${{ steps.adv_info.outputs.kernel }}
+      
     - name: make clean
       run: make clean
       
