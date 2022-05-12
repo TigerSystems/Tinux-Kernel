@@ -10,8 +10,6 @@
 #define UTS_SYSNAME "Linux"
 #endif
 
-#endif
-
 #ifndef UTS_NODENAME
 #define UTS_NODENAME CONFIG_DEFAULT_HOSTNAME /* set by sethostname() */
 #endif

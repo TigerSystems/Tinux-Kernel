@@ -11,16 +11,6 @@ NAME = Superb Owl
 # Comments in this file are targeted only to the developer, do not
 # expect to learn how to build the kernel reading this file.
 
-# For Github to get Informations
-git:
-    $(info ::set-output name=version::${VERSION})
-    $(info ::set-output name=patch::${PATCHLEVEL})
-    $(info ::set-output name=subversion::${SUBLEVEL})
-    $(info ::set-output name=extra::${EXTRAVERSION})
-    $(info ::set-output name=name::${NAME})
-
-PHONY += git
-
 $(if $(filter __%, $(MAKECMDGOALS)), \
 	$(error targets prefixed with '__' are only for internal use))
 
@@ -1505,6 +1495,14 @@ MRPROPER_FILES += include/config include/generated          \
 		  certs/x509.genkey \
 		  vmlinux-gdb.py \
 		  *.spec
+
+# For Github to get Informations
+git:
+    $(info ::set-output name=version::${VERSION})
+    $(info ::set-output name=patch::${PATCHLEVEL})
+    $(info ::set-output name=subversion::${SUBLEVEL})
+    $(info ::set-output name=extra::${EXTRAVERSION})
+    $(info ::set-output name=name::${NAME})
 
 # clean - Delete most, but leave enough to build external modules
 #
