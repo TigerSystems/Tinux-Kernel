@@ -58,3 +58,39 @@ jobs:
           #  - Second Change
         draft: false
         prerelease: false
+        
+    - name: Upload Kernel Image
+      id: upload_image
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_content_type: application/vnd.debian.binary-package
+      continue-on-error: true
+      
+    - name: Upload Kernel Headers
+      id: upload_headers
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-headers-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-headers-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_content_type: application/vnd.debian.binary-package
+      continue-on-error: true
+      
+    - name: Upload Lib
+      id: upload_lib
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-libc-dev_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-libc-dev_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_content_type: application/vnd.debian.binary-package
+      continue-on-error: true
