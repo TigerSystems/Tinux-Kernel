@@ -26,8 +26,11 @@ jobs:
     - name: Copy Default Configuration
       run: cp ./markustieger.config ./.config
       
-    - name: Build Kernel DEB-Package
+    - name: Build Kernel DEB-Packages
       run: make deb-pkg
       
-    - name: List Files
-      run: ls ./debian
+    - name: Copy DEB-Packages
+      run: mkdir deb && cp /usr/src/*.deb ./deb
+      
+    - name: List Debs
+      run: ls ./deb
