@@ -1,0 +1,2 @@
+uname: For Linux SYS Name define in "uts.h": "USE_LINUX_SYSNAME"
+

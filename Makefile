@@ -1496,8 +1496,19 @@ MRPROPER_FILES += include/config include/generated          \
 		  vmlinux-gdb.py \
 		  *.spec
 
+# For Github to get Informations
+git:
+    $(info ::set-output name=version::${VERSION})
+    $(info ::set-output name=patch::${PATCHLEVEL})
+    $(info ::set-output name=subversion::${SUBLEVEL})
+    $(info ::set-output name=extra::${EXTRAVERSION})
+    $(info ::set-output name=name::${NAME})
+
 # clean - Delete most, but leave enough to build external modules
 #
+
+
+
 clean: rm-files := $(CLEAN_FILES)
 
 PHONY += archclean vmlinuxclean

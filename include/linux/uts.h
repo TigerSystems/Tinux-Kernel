@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-2.0 */
+
 #ifndef _LINUX_UTS_H
 #define _LINUX_UTS_H
 
@@ -7,6 +8,8 @@
  */
 #ifndef UTS_SYSNAME
 #define UTS_SYSNAME "Linux"
+#endif
+
 #endif
 
 #ifndef UTS_NODENAME
