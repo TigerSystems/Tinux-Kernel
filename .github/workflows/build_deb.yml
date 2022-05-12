@@ -29,8 +29,5 @@ jobs:
     - name: Build Kernel DEB-Packages
       run: make deb-pkg
       
-    - name: Copy DEB-Packages
-      run: mkdir deb && cp /usr/src/*.deb ./deb
-      
     - name: List Debs
-      run: ls ./deb
+      run: ls ./..
