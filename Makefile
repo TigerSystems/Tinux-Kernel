@@ -1497,12 +1497,15 @@ MRPROPER_FILES += include/config include/generated          \
 		  *.spec
 
 # For Github to get Informations
+
+PHONY += git
+
 git:
-    $(info ::set-output name=version::${VERSION})
-    $(info ::set-output name=patch::${PATCHLEVEL})
-    $(info ::set-output name=subversion::${SUBLEVEL})
-    $(info ::set-output name=extra::${EXTRAVERSION})
-    $(info ::set-output name=name::${NAME})
+	$(info ::set-output name=version::${VERSION})
+	$(info ::set-output name=patch::${PATCHLEVEL})
+	$(info ::set-output name=subversion::${SUBLEVEL})
+	$(info ::set-output name=extra::${EXTRAVERSION})
+	$(info ::set-output name=name::${NAME})
 
 # clean - Delete most, but leave enough to build external modules
 #
