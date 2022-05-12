@@ -9,11 +9,19 @@ on:
 
 jobs:
   build:
-
+    permissions: write-all
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Update APT
+      run: sudo apt-get update
+    - name: Install Dependencies
+      run: sudo apt-get install libncurses-dev gawk flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf
+    
+    - name: Getting Informations
+      id: info
+      run: make git && echo "::set-output name=sha_short::$(git rev-parse --short HEAD)" && echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.info.outputs.sha_short }}
     
     - name: make clean
       run: make clean
@@ -21,5 +29,20 @@ jobs:
     - name: Copy Default Configuration
       run: cp ./markustieger.config ./.config
       
-    - name: Build Kernel DEB-Package
-      run: make deb-dpg
+    - name: Build Kernel DEB-Packages
+      run: make deb-pkg
+      
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.info.outputs.sha_short }}
+        release_name: ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.info.outputs.sha_short }}
+          #body: |
+          #  Changes in this Release
+          #  - First Change
+          #  - Second Change
+        draft: false
+        prerelease: false
