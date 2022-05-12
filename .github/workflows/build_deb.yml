@@ -23,13 +23,17 @@ jobs:
       id: info
       run: make git
       
+    - name: Getting Advanced Informations
+      id: adv_info
+      run: make kernelgit
+      
     - name: Getting Commit-Hash
       id: commit
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     
     - name: Printing Debugging-Text
       id: debug
-      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }}
+      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }} Kernel: ${{ steps.adv_info.outputs.kernel }}
     
     - name: make clean
       run: make clean
