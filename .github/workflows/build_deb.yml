@@ -21,7 +21,15 @@ jobs:
     
     - name: Getting Informations
       id: info
-      run: make git && echo "::set-output name=sha_short::$(git rev-parse --short HEAD)" && echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.info.outputs.sha_short }}
+      run: make git
+      
+    - name: Getting Commit-Hash
+      id: commit
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)" }}
+    
+    - name: Printing Debugging-Text
+      id: debug
+      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.info.outputs.sha_short
     
     - name: make clean
       run: make clean
