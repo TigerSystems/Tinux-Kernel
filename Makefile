@@ -1954,6 +1954,9 @@ checkstack:
 kernelrelease:
 	@echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion $(srctree))"
 
+kernelgit:
+	@echo "::set-output name=kernel::$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion $(srctree))"
+
 kernelversion:
 	@echo $(KERNELVERSION)
 
