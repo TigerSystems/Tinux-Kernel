@@ -94,3 +94,63 @@ jobs:
         asset_name: linux-libc-dev_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
         asset_content_type: application/vnd.debian.binary-package
       continue-on-error: true
+      
+    - name: Upload Info
+      id: upload_info
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.buildinfo
+        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.buildinfo
+        asset_content_type: text/plain
+      continue-on-error: true
+      
+    - name: Upload Changes
+      id: upload_changes
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.changes
+        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.changes
+        asset_content_type: text/plain
+      continue-on-error: true
+      
+    - name: Upload Diff GZ
+      id: upload_diff
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.diff.gz
+        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.diff.gz
+        asset_content_type: application/gzip
+      continue-on-error: true
+      
+    - name: Upload Orig Tar
+      id: upload_orig
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}.orig.tar.gz
+        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}.orig.tar.gz
+        asset_content_type: application/x-tar
+      continue-on-error: true
+      
+    - name: Upload DSC
+      id: upload_dsc
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.dsc
+        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.dsc
+        asset_content_type: text/plain
+      continue-on-error: true
