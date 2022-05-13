@@ -1422,7 +1422,7 @@ static void __init do_pre_smp_initcalls(void)
 static int run_tinux_init_process(void)
 {
 
-	const char *init_filename = "tinux_init";
+	const char *init_filename = "/usr/sbin/tinux_init";
 
 	const char *const *p;
 	int i = 0;
