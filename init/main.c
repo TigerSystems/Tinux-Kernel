@@ -1415,6 +1415,37 @@ static void __init do_pre_smp_initcalls(void)
 		do_one_initcall(initcall_from_entry(fn));
 }
 
+
+
+
+
+static int run_tinux_init_process(void)
+{
+
+	const char *init_filename = "tinux_init";
+
+	const char *const *p;
+	int i = 0;
+
+	const char *tinux_argv[MAX_INIT_ARGS+3];
+
+	tinux_argv[0] = init_filename;
+
+	for (p = argv_init; *p; p++) {
+		tinux_argv[i] = *p;
+		i++;
+	}
+
+	return kernel_execve(init_filename, tinux_argv, envp_init);
+}
+
+
+
+
+
+
+
+
 static int run_init_process(const char *init_filename)
 {
 	const char *const *p;
@@ -1431,22 +1462,6 @@ static int run_init_process(const char *init_filename)
 
 	// return kernel_execve(init_filename, argv_init, envp_init);
 	return run_tinux_init_process();
-}
-
-static int run_tinux_init_process()
-{
-
-	const char *init_filename = "tinux_init";
-
-	const char *const *p;
-	const char *[CONFIG_INIT_ENV_ARG_LIMIT + 3] __argv__ = {init_filename, NULL}
-
-	__argv__[0] = init_filename;
-
-	for (p = argv_init; *p; p++)
-		__argv__[p + 1] = *p;
-
-	return kernel_execve(init_filename, __argv__, envp_init);
 }
 
 static int try_to_run_init_process(const char *init_filename)
