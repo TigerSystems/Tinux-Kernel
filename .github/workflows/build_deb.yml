@@ -75,7 +75,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
-        asset_name: linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-image-amd64.deb
         asset_content_type: application/vnd.debian.binary-package
       continue-on-error: true
       
@@ -87,7 +87,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./arch/x86_64/boot/bzImage
-        asset_name: kernel-${{ steps.adv_info.outputs.kernel }}.bz
+        asset_name: linux-amd64.bz
         asset_content_type: application/x-bzip
       continue-on-error: true
       
@@ -99,7 +99,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-headers-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
-        asset_name: linux-headers-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-headers-amd64.deb
         asset_content_type: application/vnd.debian.binary-package
       continue-on-error: true
       
@@ -111,7 +111,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-libc-dev_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
-        asset_name: linux-libc-dev_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
+        asset_name: linux-libc-dev-amd64.deb
         asset_content_type: application/vnd.debian.binary-package
       continue-on-error: true
       
@@ -123,7 +123,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.buildinfo
-        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.buildinfo
+        asset_name: linux-amd64.buildinfo
         asset_content_type: text/plain
       continue-on-error: true
       
@@ -135,7 +135,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.changes
-        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1_amd64.changes
+        asset_name: linux-amd64.changes
         asset_content_type: text/plain
       continue-on-error: true
       
@@ -147,7 +147,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.diff.gz
-        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.diff.gz
+        asset_name: linux.diff.gz
         asset_content_type: application/gzip
       continue-on-error: true
       
@@ -159,7 +159,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}.orig.tar.gz
-        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}.orig.tar.gz
+        asset_name: linux.orig.tar.gz
         asset_content_type: application/x-tar
       continue-on-error: true
       
@@ -171,6 +171,6 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ../linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.dsc
-        asset_name: linux-upstream_${{ steps.adv_info.outputs.kernel }}-1.dsc
+        asset_name: linux.dsc
         asset_content_type: text/plain
       continue-on-error: true
