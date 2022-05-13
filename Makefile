@@ -3,7 +3,7 @@ VERSION = 5
 PATCHLEVEL = 18
 SUBLEVEL = 0
 EXTRAVERSION = -rc1
-NAME = Superb Owl
+NAME = Tinux
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
