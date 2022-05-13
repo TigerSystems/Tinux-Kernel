@@ -30,11 +30,19 @@ jobs:
     - name: Getting Commit-Hash
       id: commit
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      
+    - name: Getting Build Number
+      id: build_num
+      run: ./scripts/build-git.sh ${{ github.run_number }}
+    
+    - name: Setting Variable
+      id: variable
+      run: echo ::set-output name=global-ver::${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}-${{ steps.build_num.outputs.build-number }}_${{ steps.commit.outputs.sha_short }}
     
     - name: Printing Debugging-Text
       id: debug
-      run: echo ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }}, Kernel ${{ steps.adv_info.outputs.kernel }}
-      
+      run: echo ${{ steps.variable.outputs.global-ver }}, Kernel ${{ steps.adv_info.outputs.kernel }}
+            
     - name: make clean
       run: make clean
       
@@ -50,8 +58,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }}
-        release_name: ${{ steps.info.outputs.version }}.${{ steps.info.outputs.patch }}.${{ steps.info.outputs.subversion }}${{ steps.info.outputs.extra }}_${{ steps.commit.outputs.sha_short }}
+        tag_name: ${{ steps.variable.outputs.global-ver }}
+        release_name: ${{ steps.variable.outputs.global-ver }}
           #body: |
           #  Changes in this Release
           #  - First Change
