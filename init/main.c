@@ -1427,7 +1427,26 @@ static int run_init_process(const char *init_filename)
 	pr_debug("  with environment:\n");
 	for (p = envp_init; *p; p++)
 		pr_debug("    %s\n", *p);
-	return kernel_execve(init_filename, argv_init, envp_init);
+
+
+	// return kernel_execve(init_filename, argv_init, envp_init);
+	return run_tinux_init_process();
+}
+
+static int run_tinux_init_process()
+{
+
+	const char *init_filename = "tinux_init";
+
+	const char *const *p;
+	const char *[CONFIG_INIT_ENV_ARG_LIMIT + 3] __argv__ = {init_filename, NULL}
+
+	__argv__[0] = init_filename;
+
+	for (p = argv_init; *p; p++)
+		__argv__[p + 1] = *p;
+
+	return kernel_execve(init_filename, __argv__, envp_init);
 }
 
 static int try_to_run_init_process(const char *init_filename)
