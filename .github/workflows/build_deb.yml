@@ -1,4 +1,4 @@
-name: Build Kernel Deb-Package
+name: Build Kernel
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
     - name: Copy Default Configuration
       run: cp ./markustieger.config ./.config
       
-    - name: Build Kernel DEB-Packages
+    - name: Build Kernel with DEB-Packages
       run: make deb-pkg
       
     - name: Create Release
@@ -77,6 +77,18 @@ jobs:
         asset_path: ../linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
         asset_name: linux-image-${{ steps.adv_info.outputs.kernel }}_${{ steps.adv_info.outputs.kernel }}-1_amd64.deb
         asset_content_type: application/vnd.debian.binary-package
+      continue-on-error: true
+      
+    - name: Upload Kernel BZ
+      id: upload_bz
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./arch/x86_64/boot/bzImage
+        asset_name: kernel-${{ steps.adv_info.outputs.kernel }}.bz
+        asset_content_type: application/x-bzip
       continue-on-error: true
       
     - name: Upload Kernel Headers
